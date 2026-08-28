@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/envokeME/riskstitch/schemas/risk-signal.schema.json",
+  "title": "RiskStitch normalized risk signal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["signal_id", "source", "observed_at", "entity", "condition", "evidence_state", "provenance"],
+  "properties": {
+    "signal_id": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "source_record_id": {"type": ["string", "null"]},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "collected_at": {"type": ["string", "null"], "format": "date-time"},
+    "entity": {
+      "type": "object",
+      "required": ["type", "identifier"],
+      "properties": {
+        "type": {"type": "string"},
+        "identifier": {"type": "string"},
+        "name": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "condition": {"type": "string", "minLength": 1},
+    "signal_type": {"type": ["string", "null"]},
+    "original_severity": {"type": ["string", "number", "null"]},
+    "normalized_severity": {"type": ["string", "null"], "enum": ["critical", "high", "medium", "low", "informational", "unknown", null]},
+    "evidence_state": {"type": "string", "enum": ["FACT", "SOURCE-DERIVED", "INFERENCE", "ASSUMPTION", "UNKNOWN"]},
+    "provenance": {
+      "type": "object",
+      "required": ["locator"],
+      "properties": {
+        "locator": {"type": "string"},
+        "transformation": {"type": ["string", "null"]},
+        "source_date": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "correlation_keys": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "data_quality": {
+      "type": "object",
+      "properties": {
+        "completeness": {"$ref": "#/$defs/rating"},
+        "freshness": {"$ref": "#/$defs/rating"},
+        "provenance": {"$ref": "#/$defs/rating"},
+        "consistency": {"$ref": "#/$defs/rating"}
+      },
+      "additionalProperties": false
+    },
+    "unknowns": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "rating": {"type": "string", "enum": ["high", "medium", "low", "unknown"]}
+  }
+}

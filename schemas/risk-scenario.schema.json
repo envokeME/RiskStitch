@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/envokeME/riskstitch/schemas/risk-scenario.schema.json",
+  "title": "RiskStitch risk scenario",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scenario_id", "scope", "time_horizon", "source", "event", "impact", "evidence_state", "human_review_required"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "scope": {"type": "string"},
+    "time_horizon": {"type": "string"},
+    "source": {"type": "string"},
+    "condition": {"type": ["string", "null"]},
+    "event": {"type": "string"},
+    "affected_objective": {"type": ["string", "null"]},
+    "impact": {"type": "string"},
+    "primary_loss": {"type": ["string", "null"]},
+    "secondary_loss": {"type": ["string", "null"]},
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "point_of_action", "evidence_state"],
+        "properties": {
+          "name": {"type": "string"},
+          "point_of_action": {"type": "string"},
+          "expected_effect": {"type": ["string", "null"]},
+          "evidence_state": {"$ref": "#/$defs/evidence_state"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence_state": {"$ref": "#/$defs/evidence_state"},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "human_review_required": {"const": true}
+  },
+  "$defs": {
+    "evidence_state": {"type": "string", "enum": ["FACT", "SOURCE-DERIVED", "INFERENCE", "ASSUMPTION", "UNKNOWN"]}
+  }
+}
