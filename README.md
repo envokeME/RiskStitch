@@ -35,7 +35,7 @@ This does not make model output correct. It makes the expected behavior, evidenc
 
 ## Start in 60 seconds
 
-1. Choose a bounded GRC task from the [flagship launch set](#flagship-launch-set).
+1. Choose a bounded GRC task from the [recommended starting set](#recommended-starting-set), or browse all 28 patterns in [`catalog.json`](catalog.json).
 2. Open that pattern's `patterns/<pattern-name>/system.md` file.
 3. Use the file as the system or task instruction in [Fabric, ChatGPT, Claude, or Codex](docs/using-with-ai-tools.md).
 4. Supply sanitized source material as the input. Do not include secrets, client evidence, regulated data, or unnecessary personal information.
@@ -88,9 +88,27 @@ Signal record → Evidence ledger → Data quality → Correlation keys
 
 The result should record the scanner observation and score as source-derived, preserve the current exposure and owner as unknown, identify the evidence needed next, and retain prioritization authority with the responsible human. See the [complete walkthrough](examples/end-to-end-walkthrough.md), [input fixture](examples/normalize-risk-signal/input.md), and [illustrative expected output](examples/normalize-risk-signal/expected-output.md).
 
-## Flagship launch set
+## All 28 patterns ship in v0.1.0
 
-RiskStitch contains 28 patterns. These nine are the recommended starting set because they cover recurring, high-value GRC work across the evidence-to-decision lifecycle. They remain experimental until broader model evaluation is completed.
+RiskStitch v0.1.0 ships all 28 patterns across seven GRC domains. The repository does not hide the remaining patterns behind a later release, paid tier, or private catalog.
+
+The domain inventory below shows the full release:
+
+| Domain | Patterns | Representative work |
+|---|---:|---|
+| Risk | 8 | Normalize signals, write risk statements, build scenarios, prioritize findings, FAIR-style quantification, closure validation, KRIs, challenge narratives |
+| Controls | 5 | Design controls, test design and operating effectiveness, evaluate evidence, map controls to evidence |
+| Third-party risk | 4 | Vendor tiering, SOC report review, vendor security assessment, TPRM risk drafting |
+| Audit and compliance | 5 | Requirement mapping, gap assessment, audit findings, management responses, regulatory change analysis |
+| AI governance and privacy | 3 | AI inventory, AI risk assessment, privacy impact screening |
+| Resilience | 2 | Business impact analysis, incident lessons |
+| Executive communication | 1 | Translate technical risk into business decision language |
+
+Browse every pattern and its inputs, outputs, tags, status, and file path in the machine-readable [`catalog.json`](catalog.json).
+
+## Recommended starting set
+
+These nine are the clearest entry points for a new user because they cover recurring, high-value work across the evidence-to-decision lifecycle. This is navigation, not a limit on what ships. All 28 patterns remain available and experimental until broader model evaluation is completed.
 
 | Pattern | Use it when | Primary value |
 |---|---|---|
@@ -104,19 +122,7 @@ RiskStitch contains 28 patterns. These nine are the recommended starting set bec
 | [`grc_quantify_risk_fair`](patterns/grc_quantify_risk_fair/system.md) | Risk needs frequency and magnitude ranges | Exposes estimate basis and blocks false precision |
 | [`grc_translate_risk_to_business`](patterns/grc_translate_risk_to_business/system.md) | Technical findings need an accountable business decision | Frames scenario, exposure, options, tradeoffs, and the retained decision |
 
-The [launch evaluation record](docs/launch-evaluation.md) states what has and has not been tested. The complete machine-readable inventory is in [`catalog.json`](catalog.json).
-
-## What is included
-
-| Domain | Patterns | Representative work |
-|---|---:|---|
-| Risk | 8 | Normalize signals, write risk statements, build scenarios, prioritize findings, FAIR-style quantification, closure validation, KRIs, challenge narratives |
-| Controls | 5 | Design controls, test design and operating effectiveness, evaluate evidence, map controls to evidence |
-| Third-party risk | 4 | Vendor tiering, SOC report review, vendor security assessment, TPRM risk drafting |
-| Audit and compliance | 5 | Requirement mapping, gap assessment, audit findings, management responses, regulatory change analysis |
-| AI governance and privacy | 3 | AI inventory, AI risk assessment, privacy impact screening |
-| Resilience | 2 | Business impact analysis, incident lessons |
-| Executive communication | 1 | Translate technical risk into business decision language |
+The [launch evaluation record](docs/launch-evaluation.md) states what has and has not been tested.
 
 ## More than a prompt list
 
