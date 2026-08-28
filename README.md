@@ -11,49 +11,100 @@
 
 RiskStitch converts raw GRC inputs—scanner findings, policies, evidence, audit notes, risk narratives, vendor documents, regulatory changes, and AI use cases—into structured drafts that a practitioner can inspect, challenge, and approve.
 
-It is inspired by [Fabric](https://github.com/danielmiessler/Fabric) and uses Fabric's `system.md` pattern format. RiskStitch is an independent project and is not affiliated with or endorsed by Fabric.
+RiskStitch is inspired by [Fabric](https://github.com/danielmiessler/Fabric) and specializes the pattern concept for GRC. It uses Fabric's `system.md` format but adds a shared evidence contract, explicit missing-data behavior, source traceability, protected-decision boundaries, deterministic generation, schemas, examples, and tests. RiskStitch is independent and is not affiliated with or endorsed by Fabric.
 
 > Status: **EXPERIMENTAL.** The patterns are operational drafts with structural tests. They are not certified by NIST, ISO, AICPA, The Open Group, FIRST, CISA, regulators, or standards bodies.
 
-## Start here
+## The problem
 
-You do not need to be a GRC specialist or a Fabric user to understand the project.
+Generic prompts can produce polished GRC language without a defensible chain from evidence to conclusion. A severe scanner finding may become a “critical business risk” even when the asset owner, present exposure, data sensitivity, control state, and business impact are unknown. A policy may be summarized as implemented. A screenshot may be treated as sufficient audit evidence. A vendor claim may be repeated as fact.
 
-- **New to GRC?** Read the [plain-English GRC field guide](docs/grc-primer.md). It explains risk, controls, evidence, compliance, and audit through one worked example.
-- **Ready to try one pattern?** Start with [`grc_normalize_risk_signal`](patterns/grc_normalize_risk_signal/system.md) and its [worked example](examples/normalize-risk-signal/).
-- **Already use Fabric?** Go directly to [Quick start with Fabric](#quick-start-with-fabric).
-- **Reviewing the engineering?** Read the [architecture](docs/architecture.md), [safety model](docs/safety-model.md), and [model-testing protocol](docs/model-testing.md).
-
-## Why this exists
-
-Generic prompts produce polished text without a defensible chain from evidence to conclusion. GRC work requires the opposite:
+GRC work requires a controlled path:
 
 `Signal → Context → Measure → Treat → Validate`
 
 Every RiskStitch pattern applies the same evidence contract:
 
-- distinguish facts, source-derived statements, inferences, assumptions, and unknowns;
+- distinguish `FACT`, `SOURCE-DERIVED`, `INFERENCE`, `ASSUMPTION`, and `UNKNOWN`;
 - cite evidence locations from the supplied input;
 - refuse to invent controls, citations, scores, owners, dates, or legal conclusions;
-- expose missing information and decision dependencies;
-- reserve risk acceptance, audit opinions, compliance claims, and legal judgments for authorized humans.
+- expose missing information, contradictions, and decision dependencies;
+- reserve risk acceptance, audit opinions, compliance claims, legal judgments, and final approvals for accountable humans.
 
-## More than a list of prompts
+This does not make model output correct. It makes the expected behavior, evidence boundary, and review responsibility visible and testable.
 
-GRC prompt libraries already exist, and some contain more prompts than RiskStitch. RiskStitch focuses on a different unit of value: a governed pattern that can be installed, inspected, generated, tested, versioned, and reviewed.
+## Start in 60 seconds
 
-| Typical prompt collection | RiskStitch |
-|---|---|
-| Copy-and-paste text | Standalone prompts plus Fabric-compatible `system.md` patterns |
-| Instructions authored independently | Shared evidence contract generated into every pattern |
-| Output quality judged by appearance | Evidence states, source locators, unknowns, and human-review gates |
-| Files are the source of truth | Structured specifications generate runnable files deterministically |
-| Informal examples | Sanitized inputs, expected outputs, schemas, and repository tests |
-| Model produces a deliverable | Model produces a reviewable draft; accountable humans retain decisions |
+1. Choose a bounded GRC task from the [flagship launch set](#flagship-launch-set).
+2. Open that pattern's `patterns/<pattern-name>/system.md` file.
+3. Use the file as the system or task instruction in [Fabric, ChatGPT, Claude, or Codex](docs/using-with-ai-tools.md).
+4. Supply sanitized source material as the input. Do not include secrets, client evidence, regulated data, or unnecessary personal information.
+5. Review the output's evidence locators, unknowns, assumptions, conflicts, and human-review gate.
+6. Treat the result as a draft. The accountable practitioner retains the decision.
 
-This does not make model output correct. It makes the expected behavior, evidence boundary, and review responsibility easier to see and test.
+Run the first worked example with Fabric:
 
-See [related public projects and scope](docs/related-projects.md) for an honest view of adjacent work and RiskStitch's intended contribution.
+```bash
+git clone https://github.com/envokeME/riskstitch.git
+cd riskstitch
+./scripts/install.sh /path/to/your/fabric-custom-patterns
+cat examples/normalize-risk-signal/input.md \
+  | fabric --pattern grc_normalize_risk_signal
+```
+
+Without Fabric, open [`patterns/grc_normalize_risk_signal/system.md`](patterns/grc_normalize_risk_signal/system.md), use it as the instruction in your selected AI interface, and provide [`examples/normalize-risk-signal/input.md`](examples/normalize-risk-signal/input.md) as the source input.
+
+## End-to-end example: prompt → pattern → output
+
+**User objective**
+
+> Turn a mixed cloud-security finding into a traceable risk signal without inventing missing context.
+
+**Source input**
+
+```text
+Wiz reports a public storage bucket. Asset owner unknown. CVSS 9.1.
+The issue was seen last month, but no current exposure test is attached.
+```
+
+**Selected pattern**
+
+[`grc_normalize_risk_signal`](patterns/grc_normalize_risk_signal/system.md)
+
+**Execution prompt**
+
+```text
+Follow the attached RiskStitch pattern as the governing task instruction.
+Analyze only the supplied source material. Preserve unknowns and include evidence locators.
+Do not make the final risk or remediation decision.
+```
+
+**Expected output shape**
+
+```text
+Signal record → Evidence ledger → Data quality → Correlation keys
+→ Required enrichment → Routing recommendation → Human review required
+```
+
+The result should record the scanner observation and score as source-derived, preserve the current exposure and owner as unknown, identify the evidence needed next, and retain prioritization authority with the responsible human. See the [complete walkthrough](examples/end-to-end-walkthrough.md), [input fixture](examples/normalize-risk-signal/input.md), and [illustrative expected output](examples/normalize-risk-signal/expected-output.md).
+
+## Flagship launch set
+
+RiskStitch contains 28 patterns. These nine are the recommended starting set because they cover recurring, high-value GRC work across the evidence-to-decision lifecycle. They remain experimental until broader model evaluation is completed.
+
+| Pattern | Use it when | Primary value |
+|---|---|---|
+| [`grc_normalize_risk_signal`](patterns/grc_normalize_risk_signal/system.md) | Security and operational findings arrive in inconsistent formats | Preserves provenance and missing enrichment before prioritization |
+| [`grc_write_risk_statement`](patterns/grc_write_risk_statement/system.md) | A condition must become a bounded cause-event-impact scenario | Prevents vague or severity-only risk narratives |
+| [`grc_assess_evidence_quality`](patterns/grc_assess_evidence_quality/system.md) | Evidence must be judged for a defined purpose | Tests relevance, reliability, coverage, provenance, and contradictions |
+| [`grc_test_control_design`](patterns/grc_test_control_design/system.md) | A control needs design assessment before operating testing | Separates intended design, dependencies, gaps, and testability |
+| [`grc_test_control_effectiveness`](patterns/grc_test_control_effectiveness/system.md) | Operation must be tested across a period or population | Preserves sample, period, exception, and conclusion boundaries |
+| [`grc_review_soc_report`](patterns/grc_review_soc_report/system.md) | A SOC report must be evaluated for a specific vendor use case | Connects scope, period, exceptions, CUECs, and subservice dependencies |
+| [`grc_assess_vendor_security`](patterns/grc_assess_vendor_security/system.md) | Vendor claims and artifacts must be translated into risk-relevant observations | Separates vendor assertions, evidence, contradictions, gaps, and scenarios |
+| [`grc_quantify_risk_fair`](patterns/grc_quantify_risk_fair/system.md) | Risk needs frequency and magnitude ranges | Exposes estimate basis and blocks false precision |
+| [`grc_translate_risk_to_business`](patterns/grc_translate_risk_to_business/system.md) | Technical findings need an accountable business decision | Frames scenario, exposure, options, tradeoffs, and the retained decision |
+
+The [launch evaluation record](docs/launch-evaluation.md) states what has and has not been tested. The complete machine-readable inventory is in [`catalog.json`](catalog.json).
 
 ## What is included
 
@@ -67,80 +118,63 @@ See [related public projects and scope](docs/related-projects.md) for an honest 
 | Resilience | 2 | Business impact analysis, incident lessons |
 | Executive communication | 1 | Translate technical risk into business decision language |
 
-The complete machine-readable inventory is in [`catalog.json`](catalog.json).
+## More than a prompt list
 
-## Quick start with Fabric
+GRC prompt libraries already exist, and some contain more prompts than RiskStitch. RiskStitch focuses on a different unit of value: a governed pattern that can be installed, inspected, generated, tested, versioned, and reviewed.
 
-Install [Fabric](https://github.com/danielmiessler/Fabric), configure a custom patterns directory with `fabric --setup`, then copy RiskStitch patterns into that directory:
-
-```bash
-git clone https://github.com/envokeME/riskstitch.git
-cd riskstitch
-./scripts/install.sh /path/to/your/fabric-custom-patterns
-```
-
-Run a pattern against a file or piped input:
-
-```bash
-cat examples/normalize-risk-signal/input.md \
-  | fabric --pattern grc_normalize_risk_signal
-```
-
-```bash
-cat vendor-soc-notes.txt \
-  | fabric --pattern grc_review_soc_report
-```
-
-The installer does not create accounts, configure providers, request API keys, or overwrite an existing pattern unless `--force` is supplied.
-
-## Use without Fabric
-
-Each folder under [`patterns/`](patterns/) contains a standalone `system.md`. Paste that system prompt into an AI tool, then provide the source material as the user input. Model behavior and data handling depend on the selected tool and provider.
-
-## Three useful starting points
-
-### 1. Normalize mixed security findings
-
-`grc_normalize_risk_signal` separates observed facts from enrichment and decision data. It produces a stable record suitable for downstream deduplication and prioritization.
-
-Input:
-
-```text
-Wiz reports a public storage bucket. Asset owner unknown. CVSS 9.1.
-The issue was seen last month, but no current exposure test is attached.
-```
-
-Output structure:
-
-```text
-Signal record → Evidence ledger → Data quality → Correlation keys → Required enrichment → Routing recommendation
-```
-
-### 2. Test evidence instead of summarizing it
-
-`grc_assess_evidence_quality` evaluates relevance, reliability, period coverage, population completeness, provenance, and contradictions. Missing evidence remains missing.
-
-### 3. Quantify risk without false precision
-
-`grc_quantify_risk_fair` creates frequency and magnitude ranges, records the basis for every estimate, runs arithmetic only when inputs support it, and separates model output from the final business decision.
-
-Worked inputs and illustrative outputs are in [`examples/`](examples/).
-
-## The core idea in one example
-
-Suppose a scanner reports a public cloud storage bucket with a severity score of 9.1.
-
-A generic prompt may jump to: “Critical risk. Remediate immediately.” RiskStitch first separates what is known from what is merely suggested:
-
-| Question | Example treatment |
+| Typical prompt collection | RiskStitch |
 |---|---|
-| What was observed? | The scanner reported a public bucket and a 9.1 score. |
-| What is only source-derived? | The scanner's classification and score are claims from that source until verified. |
-| What is unknown? | Current exposure, data sensitivity, business owner, exploit path, and compensating controls. |
-| What can be inferred? | Public exposure may increase likelihood, but organizational risk cannot be established from the score alone. |
-| Who decides? | An authorized risk owner decides treatment or acceptance after evidence review. |
+| Copy-and-paste text | Standalone prompts plus Fabric-compatible `system.md` patterns |
+| Instructions authored independently | Shared evidence contract generated into every pattern |
+| Output quality judged by appearance | Evidence states, source locators, unknowns, and human-review gates |
+| Prompt files are the only source of truth | Structured specifications generate runnable files deterministically |
+| Informal examples | Sanitized inputs, expected outputs, schemas, and repository tests |
+| Model produces a final deliverable | Model produces a reviewable draft; accountable humans retain decisions |
 
-That separation is the difference between polished text and a defensible draft. The [GRC field guide](docs/grc-primer.md) walks through the full chain.
+See [related public projects and scope](docs/related-projects.md) for an explicit comparison and RiskStitch's intended contribution.
+
+## Use with Fabric, ChatGPT, Claude, or Codex
+
+| Interface | How the pattern is used | Best fit |
+|---|---|---|
+| Fabric | Install the pattern folders and call a pattern by name | Repeatable command-line execution |
+| ChatGPT | Use `system.md` as the chat or project instruction, then attach or paste source material | Interactive analysis and review |
+| Claude | Use `system.md` as the project or conversation instruction, then attach or paste source material | Long-document interactive analysis |
+| Codex | Reference the local `system.md` path as the governing task instruction and identify the source files | Repository-based, reproducible workflows |
+
+Read the complete [interface usage guide](docs/using-with-ai-tools.md). Model behavior, retention, access controls, and data handling depend on the selected provider and organizational configuration.
+
+## Worked examples
+
+The repository includes three fictional, sanitized examples:
+
+| Example | Pattern | Failure mode exercised |
+|---|---|---|
+| [Normalize a risk signal](examples/normalize-risk-signal/) | `grc_normalize_risk_signal` | Mixed sources, stale timestamps, missing owner, misleading severity, embedded instruction |
+| [Assess evidence quality](examples/assess-evidence-quality/) | `grc_assess_evidence_quality` | Screenshot evidence without population completeness or provenance |
+| [Quantify risk with FAIR-style ranges](examples/quantify-risk-fair/) | `grc_quantify_risk_fair` | Sparse ranges, unsupported correlation, false-precision pressure |
+
+Expected outputs illustrate structure and evidence discipline. They are not golden answers and do not validate model behavior.
+
+## Repository map
+
+```text
+RiskStitch/
+├── patterns/       Runnable Fabric-compatible system.md patterns
+├── specs/          Authored source definitions for generated patterns
+├── examples/       Sanitized inputs, expected outputs, and walkthroughs
+├── docs/           GRC primer, architecture, safety, evaluation, and roadmap
+├── schemas/        Optional machine-readable output contracts
+├── tools/          Deterministic pattern renderer
+├── scripts/        Installers and catalog utilities
+├── tests/          Repository invariants and safety checks
+├── assets/         README and GitHub social-preview artwork
+├── catalog.json    Machine-readable pattern inventory
+├── CONTRIBUTING.md Contribution and pattern-quality requirements
+└── LICENSE         MIT license
+```
+
+The [architecture guide](docs/architecture.md) explains how specifications, generated patterns, examples, schemas, validation, and human review connect.
 
 ## Pattern anatomy
 
@@ -152,29 +186,26 @@ Every generated pattern contains:
 4. a domain-specific method;
 5. an explicit output contract;
 6. special safety and quality rules;
-7. a human-review gate.
+7. an evidence-state summary;
+8. a human-review gate.
 
-Pattern specifications live in [`specs/patterns.json`](specs/patterns.json). The runnable `system.md` files are deterministically generated by [`tools/render_patterns.py`](tools/render_patterns.py), so changes are reviewable and drift is testable.
+Pattern specifications live in [`specs/patterns.json`](specs/patterns.json). Runnable `system.md` files are deterministically generated by [`tools/render_patterns.py`](tools/render_patterns.py), so changes are reviewable and drift is testable.
 
-## Validate the repository
+## Evaluation status
 
-RiskStitch uses only the Python standard library for validation.
+Repository validation and model evaluation are different:
+
+- `make validate` checks deterministic rendering, inventory consistency, required evidence rules, schema syntax, example pairing, links, assets, and prohibited overclaims.
+- [`docs/model-testing.md`](docs/model-testing.md) defines behavioral evaluation for a named pattern version, model, provider, configuration, case, date, and reviewers.
+- [`docs/launch-evaluation.md`](docs/launch-evaluation.md) records the current launch-set evidence and remaining gaps.
+
+All 28 patterns remain `experimental`. Three patterns have worked examples. No pattern is represented as provider-neutral, production-validated, or safe for autonomous decisions.
+
+Validate the repository with the Python standard library:
 
 ```bash
 make validate
 ```
-
-Validation checks:
-
-- catalog and pattern count;
-- deterministic rendering;
-- required evidence and review sections;
-- unique names and valid slugs;
-- JSON schema syntax;
-- example coverage;
-- unsafe or unsubstantiated compliance claims.
-
-Structural validation does not prove prompt quality. See [`docs/model-testing.md`](docs/model-testing.md) for the human evaluation protocol.
 
 ## Safety model
 
@@ -205,6 +236,10 @@ Patterns use general concepts drawn from public primary sources without reproduc
 - [Open FAIR](https://www.opengroup.org/openfair)
 
 Framework and regulatory references must be verified against the authoritative current source for the relevant date and jurisdiction.
+
+## Roadmap
+
+The [roadmap](docs/roadmap.md) covers adversarial fixtures, provider-neutral evaluation records, a failure taxonomy, machine-readable workflows, lineage identifiers, pipeline examples, and candidate expansion areas. Roadmap items are hypotheses, not commitments or validated strategy.
 
 ## Contributing
 
