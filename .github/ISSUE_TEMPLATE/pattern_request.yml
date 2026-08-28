@@ -1,0 +1,33 @@
+name: Pattern request
+description: Propose one bounded GRC task for a new pattern.
+title: "[pattern] "
+labels: [pattern-request]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Bounded task
+      description: Define the single GRC task and the practitioner who performs it.
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Required inputs
+      description: List source material and required context. Do not include real confidential data.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output contract
+      description: List required sections or fields.
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Human decision retained
+      description: State what the model must not decide.
+    validations:
+      required: true

@@ -1,0 +1,907 @@
+{
+  "schema_version": 1,
+  "project": "RiskStitch",
+  "release": "0.1.0",
+  "status": "experimental",
+  "pattern_count": 28,
+  "patterns": [
+    {
+      "name": "grc_normalize_risk_signal",
+      "title": "Normalize a risk signal",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Convert inconsistent security or operational observations into traceable records without losing provenance or inventing enrichment.",
+      "path": "patterns/grc_normalize_risk_signal/system.md",
+      "inputs": [
+        "Raw signal records",
+        "Source system and collection time",
+        "Known asset, identity, vendor, process, or service context",
+        "Available enrichment and taxonomy definitions"
+      ],
+      "outputs": [
+        "Normalized signal records",
+        "Evidence ledger",
+        "Correlation and deduplication candidates",
+        "Data quality",
+        "Required enrichment",
+        "Routing recommendation"
+      ],
+      "tags": [
+        "normalization",
+        "security-findings",
+        "data-pipeline",
+        "deduplication",
+        "risk-engineering"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_write_risk_statement",
+      "title": "Write a defensible risk statement",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Turn a condition or concern into a bounded cause-event-impact risk statement with explicit evidence and unknowns.",
+      "path": "patterns/grc_write_risk_statement/system.md",
+      "inputs": [
+        "Observed condition or concern",
+        "Affected asset, process, objective, data, or stakeholder",
+        "Threat or causal mechanism",
+        "Existing controls and known failures",
+        "Scope and time horizon"
+      ],
+      "outputs": [
+        "Primary risk statement",
+        "Statement components",
+        "Evidence and assumptions",
+        "Quality challenge",
+        "Alternate statement",
+        "Decision dependencies"
+      ],
+      "tags": [
+        "risk-statement",
+        "scenario",
+        "risk-register",
+        "cause-event-impact"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_build_risk_scenario",
+      "title": "Build a risk scenario",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Develop a testable risk scenario chain that connects assets, threat events, loss events, controls, and impacts.",
+      "path": "patterns/grc_build_risk_scenario/system.md",
+      "inputs": [
+        "Asset, process, service, or objective in scope",
+        "Threat community or causal source",
+        "Observed conditions and control environment",
+        "Potential primary and secondary loss events",
+        "Time horizon and organizational boundary"
+      ],
+      "outputs": [
+        "Scenario definition",
+        "Causal chain",
+        "Control points",
+        "Frequency and magnitude drivers",
+        "Scenario variants",
+        "Validation plan"
+      ],
+      "tags": [
+        "risk-scenario",
+        "causal-chain",
+        "loss-event",
+        "controls",
+        "quantification"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_prioritize_security_findings",
+      "title": "Prioritize security findings",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Create an explainable remediation queue using technical, threat, exposure, asset, identity, and business context.",
+      "path": "patterns/grc_prioritize_security_findings/system.md",
+      "inputs": [
+        "Finding records and source timestamps",
+        "Asset, service, data, identity, and owner context",
+        "Exposure and reachable attack path information",
+        "CVSS vector or score, EPSS score date, KEV status date, or other threat context",
+        "Business criticality, compensating controls, and active incidents"
+      ],
+      "outputs": [
+        "Priority queue",
+        "Scoring breakdown",
+        "Correlation groups",
+        "Urgent escalation",
+        "Enrichment queue",
+        "Exceptions and conflicts"
+      ],
+      "tags": [
+        "vulnerability-management",
+        "cloud",
+        "secrets",
+        "iam",
+        "cvss",
+        "epss",
+        "kev"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_quantify_risk_fair",
+      "title": "Quantify a risk scenario with FAIR-style ranges",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Structure frequency and magnitude estimates, calculations, uncertainty, and sensitivity without creating false precision.",
+      "path": "patterns/grc_quantify_risk_fair/system.md",
+      "inputs": [
+        "Bounded loss scenario and time horizon",
+        "Threat event frequency or contact frequency estimates",
+        "Vulnerability or control-resistance evidence",
+        "Primary and secondary loss magnitude components",
+        "Estimate ranges, source basis, and confidence",
+        "Organizational risk tolerance or decision threshold, if supplied"
+      ],
+      "outputs": [
+        "Model specification",
+        "Input estimates",
+        "Calculation",
+        "Loss magnitude components",
+        "Sensitivity and uncertainty",
+        "Decision comparison"
+      ],
+      "tags": [
+        "fair",
+        "quantitative-risk",
+        "annualized-loss",
+        "monte-carlo",
+        "uncertainty"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_validate_risk_closure",
+      "title": "Validate risk or finding closure",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Assess whether treatment and retest evidence satisfy documented closure criteria while reserving closure authority for a human.",
+      "path": "patterns/grc_validate_risk_closure/system.md",
+      "inputs": [
+        "Original risk or finding and evidence",
+        "Approved treatment plan and closure criteria",
+        "Implementation evidence and change records",
+        "Retest procedure, population, sample, result, and date",
+        "Residual risk or exception decision, if any"
+      ],
+      "outputs": [
+        "Closure criteria matrix",
+        "Evidence quality",
+        "Retest assessment",
+        "Residual exposure",
+        "Closure recommendation",
+        "Required actions"
+      ],
+      "tags": [
+        "closure",
+        "remediation",
+        "retest",
+        "validation",
+        "residual-risk"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_create_kri",
+      "title": "Design a key risk indicator",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Design a measurable KRI linked to a risk scenario, decision threshold, data source, owner, and response action.",
+      "path": "patterns/grc_create_kri/system.md",
+      "inputs": [
+        "Risk scenario and affected objective",
+        "Risk appetite, tolerance, or decision threshold",
+        "Available data sources and collection cadence",
+        "Process and data owners",
+        "Historical baseline or known limits, if supplied"
+      ],
+      "outputs": [
+        "KRI card",
+        "Thresholds",
+        "Data quality and lineage",
+        "Behavior and gaming risks",
+        "Pilot and validation",
+        "Governance"
+      ],
+      "tags": [
+        "kri",
+        "metrics",
+        "risk-appetite",
+        "monitoring",
+        "data-quality"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_challenge_risk_narrative",
+      "title": "Challenge a risk narrative",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "risk",
+      "summary": "Red-team a risk narrative by testing claims, causal logic, evidence, alternatives, and decision relevance.",
+      "path": "patterns/grc_challenge_risk_narrative/system.md",
+      "inputs": [
+        "Risk narrative, assessment, or decision memo",
+        "Supporting evidence and source dates",
+        "Scope, time horizon, and affected objectives",
+        "Proposed rating, treatment, or decision",
+        "Known dissenting views or contradictory data"
+      ],
+      "outputs": [
+        "Claims ledger",
+        "Causal and scope challenge",
+        "Alternative explanations",
+        "Rating and treatment challenge",
+        "Rewritten decision core",
+        "Unresolved disagreement"
+      ],
+      "tags": [
+        "challenge",
+        "second-line",
+        "risk-narrative",
+        "claims",
+        "decision-quality"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_design_control",
+      "title": "Design a control",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "controls",
+      "summary": "Design a control with a clear objective, actor, action, criteria, frequency, evidence, exceptions, and failure modes.",
+      "path": "patterns/grc_design_control/system.md",
+      "inputs": [
+        "Risk scenario, requirement, or control objective",
+        "Process boundary and systems",
+        "Actors, authority, and segregation constraints",
+        "Event or cadence that triggers the control",
+        "Available evidence sources and exception workflow"
+      ],
+      "outputs": [
+        "Control statement",
+        "Control design card",
+        "Risk linkage",
+        "Evidence design",
+        "Failure modes",
+        "Test approach"
+      ],
+      "tags": [
+        "control-design",
+        "control-objective",
+        "evidence",
+        "segregation-of-duties"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_test_control_design",
+      "title": "Test control design",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "controls",
+      "summary": "Assess whether a control is designed to address its stated objective before testing operation.",
+      "path": "patterns/grc_test_control_design/system.md",
+      "inputs": [
+        "Control objective and risk or requirement linkage",
+        "Control statement and procedure",
+        "Process flow, systems, actors, and population",
+        "Evidence design and exception process",
+        "Known changes, incidents, or prior findings"
+      ],
+      "outputs": [
+        "Design criteria",
+        "Design traceability",
+        "Walkthrough analysis",
+        "Design gaps",
+        "Design conclusion candidate",
+        "Operating test prerequisites"
+      ],
+      "tags": [
+        "control-testing",
+        "design-effectiveness",
+        "walkthrough",
+        "audit"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_test_control_effectiveness",
+      "title": "Test control operating effectiveness",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "controls",
+      "summary": "Evaluate whether a designed control operated across the defined period and population using traceable evidence.",
+      "path": "patterns/grc_test_control_effectiveness/system.md",
+      "inputs": [
+        "Approved control description and design conclusion",
+        "Test period and complete population",
+        "Sampling method and selected items",
+        "Execution and result evidence",
+        "Exceptions, changes, and compensating controls"
+      ],
+      "outputs": [
+        "Test scope",
+        "Population and sample assessment",
+        "Test results",
+        "Exception analysis",
+        "Conclusion candidate",
+        "Additional procedures"
+      ],
+      "tags": [
+        "operating-effectiveness",
+        "sampling",
+        "evidence",
+        "exceptions",
+        "audit"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_assess_evidence_quality",
+      "title": "Assess evidence quality",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "controls",
+      "summary": "Evaluate whether an artifact is relevant, reliable, complete, timely, traceable, and sufficient for a defined claim.",
+      "path": "patterns/grc_assess_evidence_quality/system.md",
+      "inputs": [
+        "Claim, control, requirement, or assertion being tested",
+        "Evidence artifact and provenance",
+        "Applicable period, population, scope, and criteria",
+        "Collection method and system of record",
+        "Related or contradictory evidence"
+      ],
+      "outputs": [
+        "Claim under test",
+        "Quality assessment",
+        "Coverage matrix",
+        "Contradictions and limitations",
+        "Support conclusion",
+        "Evidence request"
+      ],
+      "tags": [
+        "evidence",
+        "audit",
+        "quality",
+        "population-completeness",
+        "provenance"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_map_control_to_evidence",
+      "title": "Map controls to evidence",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "controls",
+      "summary": "Create a traceable many-to-many mapping between control assertions, evidence artifacts, periods, populations, and gaps.",
+      "path": "patterns/grc_map_control_to_evidence/system.md",
+      "inputs": [
+        "Control inventory and control assertions",
+        "Evidence inventory with owners and systems of record",
+        "Periods, populations, frequencies, and scope",
+        "Prior testing, exceptions, and known gaps",
+        "Retention and access constraints"
+      ],
+      "outputs": [
+        "Control assertion inventory",
+        "Evidence mapping",
+        "Coverage and sufficiency",
+        "Lineage and reuse",
+        "Evidence gaps",
+        "Request queue"
+      ],
+      "tags": [
+        "control-mapping",
+        "evidence-lineage",
+        "audit-readiness",
+        "automation"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_tier_vendor",
+      "title": "Tier a third party",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "third-party-risk",
+      "summary": "Propose an explainable vendor tier from inherent service characteristics and organizational dependency.",
+      "path": "patterns/grc_tier_vendor/system.md",
+      "inputs": [
+        "Service description and business use",
+        "Data types, volume, sensitivity, and processing locations",
+        "Access, integrations, privileges, and network connectivity",
+        "Operational dependency, substitutability, recovery needs, and concentration",
+        "Applicable contractual, regulatory, geographic, or customer obligations"
+      ],
+      "outputs": [
+        "Service boundary",
+        "Inherent exposure factors",
+        "Tier recommendation",
+        "Tier-change conditions",
+        "Due-diligence scope",
+        "Escalations"
+      ],
+      "tags": [
+        "tprm",
+        "vendor-tiering",
+        "inherent-risk",
+        "intake",
+        "due-diligence"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_review_soc_report",
+      "title": "Review a SOC report",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "third-party-risk",
+      "summary": "Extract scope, period, opinion language, tests, exceptions, subservice organizations, and user-entity responsibilities from a supplied SOC report.",
+      "path": "patterns/grc_review_soc_report/system.md",
+      "inputs": [
+        "Authorized SOC report or sanitized excerpts",
+        "Services and systems used by the organization",
+        "Review period and intended reliance period",
+        "Relevant commitments, risks, and customer responsibilities",
+        "Bridge letter or complementary evidence, if supplied"
+      ],
+      "outputs": [
+        "Report identity and scope",
+        "Use-case coverage",
+        "Exceptions and test results",
+        "User and subservice dependencies",
+        "Period and evidence gaps",
+        "Risk candidates and follow-up"
+      ],
+      "tags": [
+        "soc-2",
+        "soc-report",
+        "tprm",
+        "cuec",
+        "subservice-organizations"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_assess_vendor_security",
+      "title": "Assess vendor security evidence",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "third-party-risk",
+      "summary": "Evaluate vendor security claims, evidence, contradictions, gaps, and scenario relevance for a defined service use.",
+      "path": "patterns/grc_assess_vendor_security/system.md",
+      "inputs": [
+        "Vendor service and organizational use context",
+        "Questionnaire responses and supporting artifacts",
+        "Architecture, data flow, access, hosting, and subprocessors",
+        "Incidents, external signals, certifications, reports, and dates",
+        "Contractual security obligations and open findings"
+      ],
+      "outputs": [
+        "Assessment boundary",
+        "Claims and evidence matrix",
+        "Control observations",
+        "Risk scenarios",
+        "Follow-up questions",
+        "Disposition recommendation"
+      ],
+      "tags": [
+        "tprm",
+        "vendor-assessment",
+        "questionnaire",
+        "evidence",
+        "security-review"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_draft_tprm_risk",
+      "title": "Draft a third-party risk",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "third-party-risk",
+      "summary": "Translate a vendor evidence gap or control condition into a business-relevant third-party risk scenario and response options.",
+      "path": "patterns/grc_draft_tprm_risk/system.md",
+      "inputs": [
+        "Vendor service and business use",
+        "Evidence gap, control condition, exception, or incident",
+        "Data, access, integration, criticality, and concentration context",
+        "Contract terms, compensating controls, and exit constraints",
+        "Risk rubric, owner, and approval requirements"
+      ],
+      "outputs": [
+        "Third-party risk statement",
+        "Evidence basis",
+        "Exposure and controls",
+        "Likelihood and impact factors",
+        "Response options",
+        "Decision and monitoring"
+      ],
+      "tags": [
+        "tprm",
+        "risk-register",
+        "vendor-risk",
+        "treatment",
+        "contracts"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_map_requirement_to_control",
+      "title": "Map a requirement to controls",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "audit-compliance",
+      "summary": "Map authoritative requirement text to control objectives, implemented controls, evidence, and gaps without making a legal determination.",
+      "path": "patterns/grc_map_requirement_to_control/system.md",
+      "inputs": [
+        "Authoritative requirement text or authorized excerpt",
+        "Source, version, jurisdiction, effective date, and scope",
+        "Organizational activities, systems, data, and entities",
+        "Control inventory and evidence inventory",
+        "Approved interpretations or counsel guidance, if supplied"
+      ],
+      "outputs": [
+        "Requirement ledger",
+        "Control mapping",
+        "Evidence mapping",
+        "Gaps and conflicts",
+        "Applicability questions",
+        "Traceability summary"
+      ],
+      "tags": [
+        "compliance-mapping",
+        "requirements",
+        "controls",
+        "traceability",
+        "regulatory"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_build_gap_assessment",
+      "title": "Build a gap assessment",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "audit-compliance",
+      "summary": "Compare defined criteria with current controls and evidence to produce a traceable, scoped remediation backlog.",
+      "path": "patterns/grc_build_gap_assessment/system.md",
+      "inputs": [
+        "Authorized criteria or requirement inventory",
+        "Scope, version, entities, systems, locations, period, and exclusions",
+        "Current control inventory and procedures",
+        "Evidence inventory, test results, and exceptions",
+        "Owners, dependencies, target dates, and remediation constraints"
+      ],
+      "outputs": [
+        "Assessment scope",
+        "Gap matrix",
+        "Gap analysis",
+        "Remediation backlog",
+        "Coverage metrics",
+        "Limitations"
+      ],
+      "tags": [
+        "gap-assessment",
+        "compliance",
+        "remediation",
+        "readiness",
+        "controls"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_draft_audit_finding",
+      "title": "Draft an audit finding",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "audit-compliance",
+      "summary": "Draft a criteria-condition-cause-consequence finding with evidence traceability and calibrated severity rationale.",
+      "path": "patterns/grc_draft_audit_finding/system.md",
+      "inputs": [
+        "Audit objective, scope, period, and criteria",
+        "Condition, population, sample, and exception evidence",
+        "Cause analysis and management context",
+        "Actual or plausible consequence",
+        "Severity rubric, prior findings, and management response"
+      ],
+      "outputs": [
+        "Finding title",
+        "Criteria",
+        "Condition",
+        "Cause",
+        "Consequence and risk",
+        "Severity candidate",
+        "Corrective outcome and management questions"
+      ],
+      "tags": [
+        "audit-finding",
+        "criteria-condition-cause-effect",
+        "exceptions",
+        "severity"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_draft_management_response",
+      "title": "Draft a management response",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "audit-compliance",
+      "summary": "Create an accountable management response that addresses root cause, corrective outcome, milestones, evidence, and residual risk.",
+      "path": "patterns/grc_draft_management_response/system.md",
+      "inputs": [
+        "Finding, criteria, condition, consequence, and severity",
+        "Management's factual agreement or disagreement",
+        "Root-cause analysis",
+        "Corrective actions, owners, dependencies, milestones, and constraints",
+        "Closure criteria and evidence expectations"
+      ],
+      "outputs": [
+        "Management position",
+        "Root cause",
+        "Corrective action plan",
+        "Interim measures",
+        "Closure evidence",
+        "Residual risk and approvals"
+      ],
+      "tags": [
+        "management-response",
+        "remediation",
+        "root-cause",
+        "audit",
+        "closure"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_analyze_regulatory_change",
+      "title": "Analyze a regulatory change",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "audit-compliance",
+      "summary": "Compare authoritative old and new text, identify changed obligations and dependencies, and route applicability decisions to qualified owners.",
+      "path": "patterns/grc_analyze_regulatory_change/system.md",
+      "inputs": [
+        "Authoritative prior and current text or authorized excerpts",
+        "Issuing authority, jurisdiction, version, publication date, effective date, and transition rules",
+        "Organizational entities, products, data, activities, and locations",
+        "Current obligations, policies, controls, contracts, and evidence",
+        "Existing legal or compliance interpretation"
+      ],
+      "outputs": [
+        "Source and change status",
+        "Change log",
+        "Potential obligations",
+        "Organizational impact map",
+        "Implementation backlog",
+        "Interpretation and escalation"
+      ],
+      "tags": [
+        "regulatory-change",
+        "horizon-scanning",
+        "compliance",
+        "legal-review",
+        "control-impact"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_inventory_ai_use_case",
+      "title": "Inventory an AI use case",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "ai-governance-privacy",
+      "summary": "Create a lifecycle inventory record for an AI use case covering purpose, models, data, decisions, people, vendors, controls, and accountability.",
+      "path": "patterns/grc_inventory_ai_use_case/system.md",
+      "inputs": [
+        "Business purpose, owner, users, and affected stakeholders",
+        "Model, provider, version, deployment, and system components",
+        "Input, training, retrieval, prompt, output, feedback, and logging data",
+        "Decisions, autonomy, human oversight, and downstream use",
+        "Vendors, subprocessors, integrations, geography, and lifecycle stage",
+        "Known incidents, evaluations, limits, controls, and approvals"
+      ],
+      "outputs": [
+        "AI use-case card",
+        "Data and system flow",
+        "Decision and oversight",
+        "Evaluation and monitoring",
+        "Risk flags and evidence gaps",
+        "Required review gates"
+      ],
+      "tags": [
+        "ai-inventory",
+        "ai-governance",
+        "data-flow",
+        "model-risk",
+        "lifecycle"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_assess_ai_risk",
+      "title": "Assess AI risk",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "ai-governance-privacy",
+      "summary": "Develop evidence-linked AI risk scenarios across the lifecycle and trustworthy-AI characteristics.",
+      "path": "patterns/grc_assess_ai_risk/system.md",
+      "inputs": [
+        "Completed AI use-case inventory and lifecycle stage",
+        "Intended purpose, stakeholders, decisions, and impact pathways",
+        "Models, data, architecture, vendors, integrations, and deployment",
+        "Evaluation results, incidents, monitoring, and change history",
+        "Applicable organizational criteria, risk appetite, and review obligations"
+      ],
+      "outputs": [
+        "Assessment scope",
+        "AI risk scenario register",
+        "Trustworthiness coverage",
+        "Evaluation and monitoring gaps",
+        "Treatment candidates",
+        "Residual uncertainty and decisions"
+      ],
+      "tags": [
+        "ai-risk",
+        "nist-ai-rmf",
+        "trustworthy-ai",
+        "model-risk",
+        "impact-assessment"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_screen_privacy_impact",
+      "title": "Screen privacy impact",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "ai-governance-privacy",
+      "summary": "Screen an activity for privacy-risk characteristics, data-lifecycle gaps, and escalation needs without making a legal applicability decision.",
+      "path": "patterns/grc_screen_privacy_impact/system.md",
+      "inputs": [
+        "Activity, purpose, owner, users, and affected people",
+        "Personal data types, sources, volumes, sensitivity, and inferred data",
+        "Collection, use, access, sharing, location, retention, deletion, and security",
+        "Vendors, automated decisions, monitoring, biometrics, children, or vulnerable groups",
+        "Jurisdictions, notices, choices, contracts, and supplied legal basis"
+      ],
+      "outputs": [
+        "Activity and people",
+        "Personal-data lifecycle",
+        "Privacy risk scenarios",
+        "Screening triggers",
+        "Safeguards and gaps",
+        "Escalation and questions"
+      ],
+      "tags": [
+        "privacy",
+        "pia",
+        "dpia-screening",
+        "data-lifecycle",
+        "risk-to-individuals"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_build_bia",
+      "title": "Build a business impact analysis",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "resilience",
+      "summary": "Structure business services, impact over time, dependencies, recovery objectives, resource needs, and validation gaps.",
+      "path": "patterns/grc_build_bia/system.md",
+      "inputs": [
+        "Business service, process, outputs, customers, and owner",
+        "Upstream and downstream dependencies",
+        "Financial, operational, legal, safety, customer, and reputational impact over time",
+        "Current MTPD, RTO, RPO, MBCO, or recovery objectives if supplied",
+        "People, facilities, technology, data, vendor, and communication resources",
+        "Incident history, exercise results, workarounds, and seasonality"
+      ],
+      "outputs": [
+        "Service definition",
+        "Dependency map",
+        "Impact timeline",
+        "Recovery objective analysis",
+        "Resource and sequence requirements",
+        "Validation and exercise plan"
+      ],
+      "tags": [
+        "bia",
+        "business-continuity",
+        "resilience",
+        "rto",
+        "rpo",
+        "dependencies"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_analyze_incident_lessons",
+      "title": "Analyze incident lessons",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "resilience",
+      "summary": "Create an evidence-based incident timeline, causal analysis, control learning, and validated corrective-action plan.",
+      "path": "patterns/grc_analyze_incident_lessons/system.md",
+      "inputs": [
+        "Incident records, logs, tickets, messages, and timeline",
+        "Detection, escalation, containment, recovery, and communication actions",
+        "Service, data, customer, financial, safety, and compliance impact",
+        "Architecture, changes, controls, dependencies, and prior incidents",
+        "Participant observations, hypotheses, and corrective actions"
+      ],
+      "outputs": [
+        "Factual timeline",
+        "Impact",
+        "Causal analysis",
+        "Control performance",
+        "Corrective actions",
+        "Validation and systemic learning"
+      ],
+      "tags": [
+        "incident",
+        "postmortem",
+        "root-cause",
+        "controls",
+        "resilience",
+        "lessons-learned"
+      ],
+      "human_review": "required"
+    },
+    {
+      "name": "grc_translate_risk_to_business",
+      "title": "Translate technical risk into a business decision",
+      "version": "0.1.0",
+      "status": "experimental",
+      "domain": "executive-communication",
+      "summary": "Convert technical findings into a concise decision brief covering business scenario, exposure, options, tradeoffs, and decision ask.",
+      "path": "patterns/grc_translate_risk_to_business/system.md",
+      "inputs": [
+        "Technical finding or risk scenario",
+        "Affected business capabilities, customers, data, services, and commitments",
+        "Exposure, frequency, likelihood, and magnitude evidence or ranges",
+        "Existing controls, incidents, dependencies, and uncertainty",
+        "Response options, costs, time, constraints, and decision authority"
+      ],
+      "outputs": [
+        "Decision sentence",
+        "Business scenario",
+        "Exposure and confidence",
+        "Options and tradeoffs",
+        "Recommendation basis",
+        "Decision ask"
+      ],
+      "tags": [
+        "executive",
+        "risk-communication",
+        "decision-brief",
+        "business-impact",
+        "options"
+      ],
+      "human_review": "required"
+    }
+  ]
+}

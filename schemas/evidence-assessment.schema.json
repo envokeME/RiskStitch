@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/envokeME/riskstitch/schemas/evidence-assessment.schema.json",
+  "title": "RiskStitch evidence assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["claim", "artifact", "dimensions", "conclusion", "human_review_required"],
+  "properties": {
+    "claim": {"type": "string", "minLength": 1},
+    "artifact": {
+      "type": "object",
+      "required": ["name", "locator"],
+      "properties": {
+        "name": {"type": "string"},
+        "locator": {"type": "string"},
+        "system_of_record": {"type": ["string", "null"]},
+        "period": {"type": ["string", "null"]},
+        "population": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["relevance", "reliability", "completeness", "timeliness", "traceability", "corroboration"],
+      "properties": {
+        "relevance": {"$ref": "#/$defs/dimension"},
+        "reliability": {"$ref": "#/$defs/dimension"},
+        "completeness": {"$ref": "#/$defs/dimension"},
+        "timeliness": {"$ref": "#/$defs/dimension"},
+        "traceability": {"$ref": "#/$defs/dimension"},
+        "corroboration": {"$ref": "#/$defs/dimension"}
+      },
+      "additionalProperties": false
+    },
+    "contradictions": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "conclusion": {"type": "string", "enum": ["supports", "partially_supports", "does_not_support", "insufficient_information"]},
+    "additional_evidence_required": {"type": "array", "items": {"type": "string"}},
+    "human_review_required": {"const": true}
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "required": ["rating", "basis"],
+      "properties": {
+        "rating": {"type": "string", "enum": ["high", "medium", "low", "unknown"]},
+        "basis": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

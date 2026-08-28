@@ -1,0 +1,30 @@
+name: Pattern defect
+description: Report an unsafe, incorrect, inconsistent, or low-quality pattern behavior.
+title: "[defect] "
+labels: [defect]
+body:
+  - type: input
+    id: pattern
+    attributes:
+      label: Pattern name
+    validations:
+      required: true
+  - type: textarea
+    id: sanitized_input
+    attributes:
+      label: Sanitized reproduction input
+      description: Remove secrets, client information, personal data, and proprietary text.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed output or behavior
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected boundary or behavior
+    validations:
+      required: true
