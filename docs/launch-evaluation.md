@@ -1,23 +1,24 @@
 # RiskStitch v0.1.0 launch evaluation
 
-This record separates repository evidence from model-quality claims for the nine-pattern flagship launch set.
+This record separates repository evidence from model-quality claims. All 28 patterns ship in v0.1.0; nine are identified only as the recommended starting set for onboarding and focused evaluation.
 
 ## Status
 
 - Release: `0.1.0`
 - Pattern status: `EXPERIMENTAL`
 - Repository patterns: 28
-- Flagship patterns: 9
+- Patterns shipped: 28
+- Recommended starting patterns: 9
 - Worked examples: 3
 - Structural validation: implemented
 - Provider-neutral behavioral validation: not completed
 - Autonomous decision use: prohibited
 
-“Flagship” means recommended starting point. It does not mean validated, certified, or safe for unsupervised use.
+“Recommended starting pattern” is an onboarding label. It does not mean the other 19 patterns are excluded, or that any pattern is validated, certified, or safe for unsupervised use.
 
-## Why these nine patterns
+## Why evaluate these nine first
 
-The launch set was selected because it covers the recurring chain from raw signal to accountable decision while spanning risk, controls, third-party risk, quantitative analysis, and executive communication.
+All 28 patterns are included in the launch. These nine provide a compact cross-domain evaluation slice because they cover the recurring chain from raw signal to accountable decision while spanning risk, controls, third-party risk, quantitative analysis, and executive communication.
 
 | Pattern | Bounded practitioner task | Current evidence | Main failure to test |
 |---|---|---|---|
@@ -60,7 +61,7 @@ Expected outputs are illustrative structures, not golden answers. They show inte
 
 ## Minimum behavioral evaluation before status promotion
 
-Each flagship pattern must be run against at least:
+Each recommended starting pattern must be run against at least:
 
 1. complete and internally consistent evidence;
 2. incomplete evidence that blocks a conclusion;
@@ -76,7 +77,7 @@ Each record must identify the pattern commit, provider, model and version, confi
 ## Launch claims allowed
 
 - RiskStitch provides 28 experimental, Fabric-compatible GRC patterns.
-- Nine flagship patterns address recurring GRC tasks.
+- All 28 patterns are included in v0.1.0; nine provide a documented starting path for new users.
 - Three sanitized worked examples show the intended evidence and output structure.
 - Repository tests validate deterministic generation and structural safety invariants.
 - Every pattern requires evidence-state separation and accountable human review.
@@ -87,7 +88,7 @@ Each record must identify the pattern commit, provider, model and version, confi
 - The patterns produce correct, complete, legally sufficient, audit-ready, or compliant results.
 - The patterns can autonomously approve vendors, accept risk, close findings, issue audit opinions, or determine legal applicability.
 - Structural tests prove model quality.
-- The flagship label means production-ready.
+- The recommended-starting label means production-ready or excludes the other 19 patterns.
 
 ## Promotion rule
 
